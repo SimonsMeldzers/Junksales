@@ -9,9 +9,17 @@ import { Button, Typography } from '@mui/material';
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 const libraries = ["places"];
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from "swiper/modules";
+
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
 import RoomIcon from '@mui/icons-material/Room';
+import CancelIcon from '@mui/icons-material/Cancel';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 
 const theme = createTheme({
@@ -111,12 +119,35 @@ export default function ItemDesc({ item }) {
         return <div>Error loading Google Maps</div>;
     }
 
+    const pagination = {
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '">' + (index + 1) + '</span>';
+        },
+      };
+
 return (
     <ThemeProvider theme={theme}>
 
       <div className="slug">
-        <div className="s-img" style={{backgroundImage: `url(${urlFor(item.image[0] || item.image[1])})`}}>
-
+        <span className="s-img" style={{backgroundImage: `url(${urlFor(item.image[0] || item.image[1])})`}}></span>
+        <div className="s-img-container">
+            <CancelIcon />
+            <div className="s-img-sub-container">
+                <Swiper
+                    navigation={true}
+                    pagination={pagination}
+                    modules={[Navigation, Pagination]}
+                    className="mySwiper"
+                >
+                    {item.image.map((image, i) => (
+                        <SwiperSlide className="swiper-slide">
+                            <img src={urlFor(image)} alt={image._rev} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+        
         </div>
         <div className="s-text">
             <Typography className="s-text-name" variant="subtitle1" component="h1">

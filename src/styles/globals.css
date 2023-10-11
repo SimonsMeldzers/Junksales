@@ -119,17 +119,49 @@ a {
 
 .s-img{
   width: 75%;
-  filter: blur(7px) brightness(70%);
-  -webkit-filter: blur(7px) brightness(70%);
-
-  height: 100%; 
-
+  filter: blur(15px) brightness(70%);
+  -webkit-filter: blur(15px) brightness(70%);
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: 1;
-  transform: scale(1.05);
+  transform: scaleX(1.05);
+  position: absolute;
+  z-index: 0;
 }
+
+.s-img-container{
+  width: 75%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.s-img-sub-container{
+  width: 100%;
+  height: 100%;
+
+}
+
+.mySwiper{
+  height: 90%;
+  margin-top: 20px;
+}
+.swiper-slide{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: auto;
+}
+
+
+
+
+
+
+
+
 
 .s-text{
   width: 25%;
