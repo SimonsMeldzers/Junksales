@@ -66,12 +66,12 @@ export default function Home({ item }) {
 
           <Grid container className="categories" spacing={2}>
               
-            <Grid><Button variant='contained' className='category-button'> Viss </Button></Grid>
-            <Grid><Button variant='contained' className='category-button'> Būvmateriāli </Button></Grid>
-            <Grid><Button variant='contained' className='category-button'> Auto detaļas </Button></Grid>
-            <Grid><Button variant='contained' className='category-button'> Lauksaimniecība </Button></Grid>
-            <Grid><Button variant='contained' className='category-button'> Mājai </Button></Grid>
-            <Grid><Button variant='contained' className='category-button'> Cits </Button></Grid>
+            <Grid><Button href="/" variant='contained' className='category-button'> Viss </Button></Grid>
+            <Grid><Button href={`/?ConstructionMaterials`} variant='contained' className='category-button'> Būvmateriāli </Button></Grid>
+            <Grid><Button href={`/?CarParts`} variant='contained' className='category-button'> Auto detaļas </Button></Grid>
+            <Grid><Button href={`/?FarmItems`} variant='contained' className='category-button'> Lauksaimniecība </Button></Grid>
+            <Grid><Button href={`/?ForHome`} variant='contained' className='category-button'> Mājai </Button></Grid>
+            <Grid><Button href={`/?Other`} variant='contained' className='category-button'> Cits </Button></Grid>
 
           </Grid>
 
