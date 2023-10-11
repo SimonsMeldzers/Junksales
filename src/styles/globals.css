@@ -52,3 +52,43 @@ a {
   font-weight: 400;
   border-radius: 12px;
 }
+
+.items{
+  display: flex;
+  margin: 20px auto auto auto !important;
+  justify-content: center;
+}
+
+.items-item{
+  border-radius: 3px;
+  border: solid 1px #D9D9D9;
+  padding: 0px !important;
+  width: 400px !important;
+}
+
+.items-item-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 2px 2px 0px 0px;
+  border-bottom: #407C86 solid 2px;
+}
+
+.items-item-name{
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0px 5px 3px 5px;
+}
+.items-item-address{
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0px 5px 5px 5px;
+}
+.items-item-price{
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0px 5px 5px 5px;
+  color: #407C86;
+}

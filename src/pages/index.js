@@ -6,7 +6,9 @@ import { client, urlFor } from "../../sanity/lib/client";
 import Image from "next/image";
 import Logo from "../img/logo.png"
 import Link from "next/link";
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 
 const theme = createTheme({
@@ -32,7 +34,25 @@ const theme = createTheme({
 });
 
 export default function Home({ item }) {
-  console.log(item)
+    const router = useRouter();
+    const [filteredItems, setFilteredItems] = useState([]);
+
+
+    useEffect(() => {
+      let itemCategory = router.asPath.replace(/^\/\?/, '');
+      if (itemCategory === '/') {
+        itemCategory = '';
+      }
+      let filteredItems = item;
+
+      if (itemCategory !== '') {
+        filteredItems = filteredItems.filter((item) => item.type === itemCategory);
+      }
+
+      setFilteredItems(filteredItems);
+    }, [item, router.asPath]);
+
+    console.log(filteredItems)
   return (
     <ThemeProvider theme={theme}>
 
@@ -55,11 +75,33 @@ export default function Home({ item }) {
 
           </Grid>
 
-          {/* <Grid container className="items" spacing={2}>
-            <Grid md={3}> </Grid>
-          </Grid> */}
+          <Grid container className="items" gap={2}>
+            {filteredItems.map((item) => (
+              <Grid 
+                xl={3}
+                lg={3}
+                md={3}
+                sm={6}
+                xs={6}
+                className="items-item"
+                key={item._rev}
+              >
+                <Link href="/">
+                  <img 
+                    src={urlFor(item.image[1] || item.image[0])}
+                    alt={item._key}
+                    className='items-item-img'
+                    key={item._rev}
+                  />
+                  <Typography variant='subtitle1' component='h1' className='items-item-name'>{item.name}</Typography>
+                  <Typography variant='subtitle1' component='h2' className='items-item-address'>{item.address}</Typography>
+                  <Typography variant='subtitle1' component='p' className='items-item-price'>{item.price}€</Typography>
+                </Link>
 
-          <h1>HELLO</h1>
+              </Grid>
+            ))}
+            
+          </Grid>
 
         </div>
       </div>
