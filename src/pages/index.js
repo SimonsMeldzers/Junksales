@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { client, urlFor } from "../../sanity/lib/client";
+import { client, urlFor } from "../../sanity/lib/client";
 
 import Image from "next/image";
 import Logo from "../img/logo.png"
@@ -31,7 +31,8 @@ const theme = createTheme({
   },
 });
 
-export default function Home() {
+export default function Home({ item }) {
+  console.log(item)
   return (
     <ThemeProvider theme={theme}>
 
@@ -78,3 +79,12 @@ export default function Home() {
 //     },
 //   };
 // };
+
+export const getServerSideProps = async () => {
+  const query = `*[_type == "item"]`;
+  const item = await client.fetch(query);
+
+  return{
+    props: { item }
+  }
+}
