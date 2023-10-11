@@ -11,6 +11,7 @@ const libraries = ["places"];
 
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
+import RoomIcon from '@mui/icons-material/Room';
 
 
 const theme = createTheme({
@@ -36,7 +37,7 @@ const theme = createTheme({
 });
 
 function Map({ center }) {
-    console.log(center)
+
     return (
       <GoogleMap className='slug-map' zoom={14} center={center} mapContainerClassName="map-container">
         <MarkerF position={center} />
@@ -178,10 +179,13 @@ return (
             <div>
                 {!isLoaded ? <div>Loading...</div> : center ? <Map center={center} /> : <div>Invalid address</div>}
             </div>
-
-            <Typography style={{color: "#407C86"}}>
-                {item.address}
-            </Typography>
+            
+            <div style={{display: 'flex', marginTop: '5px'}}>
+                <RoomIcon style={{color: "#407C86"}}/>
+                <Typography style={{color: "#407C86"}}>
+                    {item.address}
+                </Typography>
+            </div>
 
 
 
