@@ -161,9 +161,9 @@ a {
 
 .s-text-price{
   color: #407C86;
-  font-size: 22px;
-  font-weight: 500;
-  margin: 5px 0px 8px 0px;
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  margin: 5px 0px 8px 0px !important;
 }
 
 .s-text-details{
@@ -183,5 +183,15 @@ a {
 .slug-text-desc-button{
   width: 120px;
   text-transform: none !important;
-  margin-top: 20px;
+  margin-top: 20px !important;
+}
+
+.slug-map{
+  width: 100%;
+  height: 250px;
+}
+
+.map-container{
+  height: 250px;
+  margin-top: 30px;
 }

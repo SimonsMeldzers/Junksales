@@ -1,12 +1,16 @@
+import { useEffect, useState } from "react";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { client, urlFor } from "../../../sanity/lib/client";
 
 import Link from "next/link";
 import { Button, Typography } from '@mui/material';
 
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+const libraries = ["places"];
+
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailIcon from '@mui/icons-material/Email';
-import { useEffect, useState } from "react";
 
 
 const theme = createTheme({
@@ -31,6 +35,15 @@ const theme = createTheme({
   },
 });
 
+function Map({ center }) {
+    console.log(center)
+    return (
+      <GoogleMap className='slug-map' zoom={14} center={center} mapContainerClassName="map-container">
+        <MarkerF position={center} />
+      </GoogleMap>
+    );
+   }
+
 export default function ItemDesc({ item }) {
     // For Expandable details text
     const [expanded, setExpanded] = useState(false);
@@ -39,14 +52,65 @@ export default function ItemDesc({ item }) {
       setExpanded(true);
     };
 
+    
+    //Google Maps
+    const [center, setCenter] = useState(null);
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+        libraries,
+    });
+    
+    const geocodeAddress = async (address) => {
+        try {
+            const geocoder = new window.google.maps.Geocoder();
+            const results = await new Promise((resolve, reject) => {
+                geocoder.geocode({ address }, (results, status) => {
+                    if (status === window.google.maps.GeocoderStatus.OK) {
+                        resolve(results);
+                    } else {
+                        reject(status);
+                    }
+                });
+            });
+            
+            const { geometry } = results[0];
+            const { lat, lng } = geometry.location;
+            return { lat: lat(), lng: lng() };
+        } catch (error) {
+            console.error("Geocoding error:", error);
+            return null;
+        }
+    };
+    
+    useEffect(() => {
+        if (isLoaded && !loadError) {
+            if (item.address) {
+                geocodeAddress(item.address)
+                .then((coordinates) => {
+                    if (coordinates) {
+                        setCenter(coordinates);
+              } else {
+                  console.error("Invalid address");
+                }
+            })
+            .catch((error) => {
+                console.error("Geocoding error:", error);
+            });
+        }
+        }
+    }, [isLoaded, loadError, item.address]);
+
     useEffect(() => {
         if(item.details.length < 430){
             setExpanded(true);
         }
     }, [])
-    
 
-  return (
+    if (loadError) {
+        return <div>Error loading Google Maps</div>;
+    }
+
+return (
     <ThemeProvider theme={theme}>
 
       <div className="slug">
@@ -110,6 +174,15 @@ export default function ItemDesc({ item }) {
               {expanded === false ? item.details.slice(0, 430) + '...' : item.details}
             </div>
             <Button className={`slug-text-desc-button ${expanded === false ? '' : 'hide-button'}`} onClick={() => { handleExpandedChange()}} color='primary' variant="contained"> Lasīt visu </Button>
+                
+            <div>
+                {!isLoaded ? <div>Loading...</div> : center ? <Map center={center} /> : <div>Invalid address</div>}
+            </div>
+
+            <Typography style={{color: "#407C86"}}>
+                {item.address}
+            </Typography>
+
 
 
         </div>
