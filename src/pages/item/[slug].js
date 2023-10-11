@@ -4,6 +4,9 @@ import { client, urlFor } from "../../../sanity/lib/client";
 import Link from "next/link";
 import { Button, Typography } from '@mui/material';
 
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EmailIcon from '@mui/icons-material/Email';
+import { useEffect, useState } from "react";
 
 
 const theme = createTheme({
@@ -29,7 +32,20 @@ const theme = createTheme({
 });
 
 export default function ItemDesc({ item }) {
-    console.log(item)
+    // For Expandable details text
+    const [expanded, setExpanded] = useState(false);
+
+    const handleExpandedChange = () => {
+      setExpanded(true);
+    };
+
+    useEffect(() => {
+        if(item.details.length < 430){
+            setExpanded(true);
+        }
+    }, [])
+    
+
   return (
     <ThemeProvider theme={theme}>
 
@@ -60,17 +76,42 @@ export default function ItemDesc({ item }) {
                 {item.price}€
             </Typography>
 
-            <Typography style={{fontWeight: "500"}}> 
+            <Typography style={{fontWeight: "600"}}> 
                 Sazināties:
             </Typography>
 
-            <Typography>
-                +371 20116677
+            <div style={{display: 'flex', marginTop: '5px'}}>
+              <LocalPhoneIcon/>
+              <p style={{marginLeft: '5px', marginTop: "1px"}}>+371 20116677</p>
+            </div>
+            <div style={{display: 'flex', marginTop: '5px'}}>
+              <EmailIcon/>
+              <p style={{marginLeft: '5px', marginTop: "2px"}}>ivonaplus@inbox.lv</p>
+            </div>
+            
+            <Typography style={{fontWeight: "600", marginTop: "12px"}}> 
+                Apraksts:
             </Typography>
-    
-            <Typography>
-                ivonaplus@inbox.lv
+
+            <Typography style={{marginTop: "5px", marginBottom: "5px"}}>
+                <span style={{fontWeight: "500", marginRight: "5px"}}>Stāvoklis: </span>
+                {
+                    item.state === "New" ?
+                    "Jauns" :
+                    item.state === "Used" ?
+                    "Lietots" :
+                    item.state === "VeryUsed" ? 
+                    "Stipri Lietots" : 
+                    ""
+                }
             </Typography>
+
+            <div className={`slug-text-desc ${expanded === false ? 'gradient-text' : ''}`} >
+              {expanded === false ? item.details.slice(0, 430) + '...' : item.details}
+            </div>
+            <Button className={`slug-text-desc-button ${expanded === false ? '' : 'hide-button'}`} onClick={() => { handleExpandedChange()}} color='primary' variant="contained"> Lasīt visu </Button>
+
+
         </div>
       </div>
 

@@ -133,11 +133,13 @@ a {
 
 .s-text{
   width: 25%;
+  height: 100vh;
   background-color: #f9f9f9;
   z-index: 2;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .s-text-name{
@@ -162,4 +164,24 @@ a {
   font-size: 22px;
   font-weight: 500;
   margin: 5px 0px 8px 0px;
+}
+
+.s-text-details{
+  /* height: 300px; */
+  
+}
+/* For expandable details */
+.gradient-text{
+  background: linear-gradient(to bottom, black, rgb(95, 95, 95));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hide-button{
+  display: none !important;
+}
+
+.slug-text-desc-button{
+  width: 120px;
+  text-transform: none !important;
+  margin-top: 20px;
 }
