@@ -88,7 +88,7 @@ export default function Home({ item }) {
               >
                 <Link href="/">
                   <img 
-                    src={urlFor(item.image[1] || item.image[0])}
+                    src={urlFor(item.image[0] || item.image[1])}
                     alt={item._key}
                     className='items-item-img'
                     key={item._rev}
