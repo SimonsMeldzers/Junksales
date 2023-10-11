@@ -135,4 +135,31 @@ a {
   width: 25%;
   background-color: #f9f9f9;
   z-index: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.s-text-name{
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 24px !important;
+}
+
+.s-text-category{
+  color: #407C86;
+  text-decoration: underline;
+  width:fit-content;
+}
+
+.s-text-link{
+  width: fit-content;
+  display:flex;
+}
+
+.s-text-price{
+  color: #407C86;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 5px 0px 8px 0px;
 }

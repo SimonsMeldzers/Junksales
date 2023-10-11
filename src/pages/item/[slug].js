@@ -38,8 +38,38 @@ export default function ItemDesc({ item }) {
 
         </div>
         <div className="s-text">
-            <Typography>
+            <Typography className="s-text-name" variant="subtitle1" component="h1">
+                {item.name}
+            </Typography>
+            <Link className="s-text-link" href={`/?${item.type}`}>
+                <Typography className="s-text-category" variant="subtitle1" component="h2">
+                    {
+                        item.type === "CarParts" ?
+                        "Auto detaļas" :
+                        item.type === "ConstructionMaterials" ?
+                        "Būvmateriāli" :
+                        item.type === "FarmItems" ?
+                        "Lauksaimniecība" : 
+                        item.type === "ForHome" ?
+                        "Mājai" :
+                        "Cits"
+                    }
+                </Typography>
+            </Link>
+            <Typography className="s-text-price">
+                {item.price}€
+            </Typography>
 
+            <Typography style={{fontWeight: "500"}}> 
+                Sazināties:
+            </Typography>
+
+            <Typography>
+                +371 20116677
+            </Typography>
+    
+            <Typography>
+                ivonaplus@inbox.lv
             </Typography>
         </div>
       </div>
