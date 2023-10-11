@@ -54,9 +54,11 @@ export default function Home() {
 
           </Grid>
 
-          <Grid container className="items" spacing={2}>
+          {/* <Grid container className="items" spacing={2}>
             <Grid md={3}> </Grid>
-          </Grid>
+          </Grid> */}
+
+          <h1>HELLO</h1>
 
         </div>
       </div>
