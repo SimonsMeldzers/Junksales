@@ -52,7 +52,6 @@ export default function Home({ item }) {
       setFilteredItems(filteredItems);
     }, [item, router.asPath]);
 
-    console.log(filteredItems)
   return (
     <ThemeProvider theme={theme}>
 
@@ -86,7 +85,7 @@ export default function Home({ item }) {
                 className="items-item"
                 key={item._rev}
               >
-                <Link href="/">
+                <Link href={`/item/${item.slug.current}`}>
                   <img 
                     src={urlFor(item.image[0] || item.image[1])}
                     alt={item._key}
