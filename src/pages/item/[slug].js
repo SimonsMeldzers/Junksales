@@ -132,7 +132,9 @@ return (
       <div className="slug">
         <span className="s-img" style={{backgroundImage: `url(${urlFor(item.image[0] || item.image[1])})`}}></span>
         <div className="s-img-container">
-            <CancelIcon />
+            <Link className="s-img-link" href='/'>
+              <CancelIcon className="s-img-close"/>
+            </Link>
             <div className="s-img-sub-container">
                 <Swiper
                     navigation={true}

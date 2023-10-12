@@ -144,15 +144,40 @@ a {
 
 }
 
+.s-img-link{
+  width: fit-content;
+  display:flex;
+  margin: 10px 0px 0px 20px;
+}
+
+.s-img-close{
+  color: #f9f9f9;
+  font-size: 50px;
+}
+.s-img-close:hover{
+  color: #f9f9f9df;
+  transition: ease-in 0.2s;
+}
+.s-img-close:not(:hover){
+  transition: ease-in-out 0.2s;
+}
+
 .mySwiper{
   height: 90%;
-  margin-top: 20px;
 }
 .swiper-slide{
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   margin: auto;
+}
+/* .swiper-slide img{
+  max-width: 1000px;
+  max-height: 900px;
+} */
+
+.swiper-button-prev, .swiper-button-next{
+  color: #f9f9f9 !important;
 }
 
 
