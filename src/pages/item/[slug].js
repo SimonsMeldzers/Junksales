@@ -143,8 +143,8 @@ return (
                     className="mySwiper"
                 >
                     {item.image.map((image, i) => (
-                        <SwiperSlide className="swiper-slide">
-                            <img src={urlFor(image)} alt={image._rev} />
+                        <SwiperSlide className="swiper-slide" key={image._key}>
+                            <img className="swiper-slide-img" src={urlFor(image)} alt={image._key} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
