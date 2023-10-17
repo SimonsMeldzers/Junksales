@@ -204,8 +204,23 @@ return (
                 }
             </Typography>
 
-            <div className={`slug-text-desc ${expanded === false ? 'gradient-text' : ''}`} >
-              {expanded === false ? item?.details.slice(0, 430) + '...' : item?.details}
+            <div className={`slug-text-desc ${expanded === false ? 'gradient-text' : ''}`}>
+              {expanded === false
+                ? item?.details
+                    .slice(0, 430)
+                    .split(';')
+                    .map((substring, index) => (
+                      <div key={index}>
+                        {substring}
+                        {index < item.details.split(';').length - 1 && <br />} {/* Add line break except for the last substring */}
+                      </div>
+                    ))
+                : item?.details.split(';').map((substring, index) => (
+                    <div key={index}>
+                      {substring}
+                      {index < item.details.split(';').length - 1 && <br />} {/* Add line break except for the last substring */}
+                    </div>
+                  ))}
             </div>
             <Button className={`slug-text-desc-button ${expanded === false ? '' : 'hide-button'}`} onClick={() => { handleExpandedChange()}} color='primary' variant="contained"> Lasīt visu </Button>
                 
