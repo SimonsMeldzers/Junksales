@@ -46,7 +46,7 @@ export default function Home({ item }) {
       let filteredItems = item;
 
       if (itemCategory !== '') {
-        filteredItems = filteredItems.filter((item) => item.type === itemCategory);
+        filteredItems = filteredItems.filter((item) => item?.type === itemCategory);
       }
 
       setFilteredItems(filteredItems);
@@ -75,7 +75,7 @@ export default function Home({ item }) {
           </Grid>
 
           <Grid container className="items" gap={2}>
-            {filteredItems.map((item) => (
+            {filteredItems?.map((item) => (
               <Grid 
                 xl={3}
                 lg={3}
@@ -83,18 +83,18 @@ export default function Home({ item }) {
                 sm={6}
                 xs={6}
                 className="items-item"
-                key={item._rev}
+                key={item?._rev}
               >
-                <Link href={`/item/${item.slug.current}`}>
+                <Link href={`/item/${item?.slug.current}`}>
                   <img 
-                    src={urlFor(item.image[0] || item.image[1])}
-                    alt={item._key}
+                    src={urlFor(item?.image[0] || item?.image[1])}
+                    alt={item?._key}
                     className='items-item-img'
-                    key={item._rev}
+                    key={item?._rev}
                   />
-                  <Typography variant='subtitle1' component='h1' className='items-item-name'>{item.name}</Typography>
-                  <Typography variant='subtitle1' component='h2' className='items-item-address'>{item.address}</Typography>
-                  <Typography variant='subtitle1' component='p' className='items-item-price'>{item.price}€</Typography>
+                  <Typography variant='subtitle1' component='h1' className='items-item-name'>{item?.name}</Typography>
+                  <Typography variant='subtitle1' component='h2' className='items-item-address'>{item?.address}</Typography>
+                  <Typography variant='subtitle1' component='p' className='items-item-price'>{item?.price}€</Typography>
                 </Link>
 
               </Grid>

@@ -93,8 +93,8 @@ export default function ItemDesc({ item }) {
     
     useEffect(() => {
         if (isLoaded && !loadError) {
-            if (item.address) {
-                geocodeAddress(item.address)
+            if (item?.address) {
+                geocodeAddress(item?.address)
                 .then((coordinates) => {
                     if (coordinates) {
                         setCenter(coordinates);
@@ -107,10 +107,10 @@ export default function ItemDesc({ item }) {
             });
         }
         }
-    }, [isLoaded, loadError, item.address]);
+    }, [isLoaded, loadError, item?.address]);
 
     useEffect(() => {
-        if(item.details.length < 430){
+        if(item?.details.length < 430){
             setExpanded(true);
         }
     }, [])
@@ -130,7 +130,7 @@ return (
     <ThemeProvider theme={theme}>
 
       <div className="slug">
-        <span className="s-img" style={{backgroundImage: `url(${urlFor(item.image[0] || item.image[1])})`}}></span>
+        <span className="s-img" style={{backgroundImage: `url(${urlFor(item?.image[0] || item?.image[1])})`}}></span>
         <div className="s-img-container">
             <Link className="s-img-link" href='/'>
               <CancelIcon className="s-img-close"/>
@@ -142,7 +142,7 @@ return (
                     modules={[Navigation, Pagination]}
                     className="mySwiper"
                 >
-                    {item.image.map((image, i) => (
+                    {item?.image.map((image, i) => (
                         <SwiperSlide className="swiper-slide" key={image._key}>
                             <img className="swiper-slide-img" src={urlFor(image)} alt={image._key} />
                         </SwiperSlide>
@@ -153,25 +153,25 @@ return (
         </div>
         <div className="s-text">
             <Typography className="s-text-name" variant="subtitle1" component="h1">
-                {item.name}
+                {item?.name}
             </Typography>
-            <Link className="s-text-link" href={`/?${item.type}`}>
+            <Link className="s-text-link" href={`/?${item?.type}`}>
                 <Typography className="s-text-category" variant="subtitle1" component="h2">
                     {
-                        item.type === "CarParts" ?
+                        item?.type === "CarParts" ?
                         "Auto detaļas" :
-                        item.type === "ConstructionMaterials" ?
+                        item?.type === "ConstructionMaterials" ?
                         "Būvmateriāli" :
-                        item.type === "FarmItems" ?
+                        item?.type === "FarmItems" ?
                         "Lauksaimniecība" : 
-                        item.type === "ForHome" ?
+                        item?.type === "ForHome" ?
                         "Mājai" :
                         "Cits"
                     }
                 </Typography>
             </Link>
             <Typography className="s-text-price">
-                {item.price}€
+                {item?.price}€
             </Typography>
 
             <Typography style={{fontWeight: "600"}}> 
@@ -194,18 +194,18 @@ return (
             <Typography style={{marginTop: "5px", marginBottom: "5px"}}>
                 <span style={{fontWeight: "500", marginRight: "5px"}}>Stāvoklis: </span>
                 {
-                    item.state === "New" ?
+                    item?.state === "New" ?
                     "Jauns" :
-                    item.state === "Used" ?
+                    item?.state === "Used" ?
                     "Lietots" :
-                    item.state === "VeryUsed" ? 
+                    item?.state === "VeryUsed" ? 
                     "Stipri Lietots" : 
                     ""
                 }
             </Typography>
 
             <div className={`slug-text-desc ${expanded === false ? 'gradient-text' : ''}`} >
-              {expanded === false ? item.details.slice(0, 430) + '...' : item.details}
+              {expanded === false ? item?.details.slice(0, 430) + '...' : item?.details}
             </div>
             <Button className={`slug-text-desc-button ${expanded === false ? '' : 'hide-button'}`} onClick={() => { handleExpandedChange()}} color='primary' variant="contained"> Lasīt visu </Button>
                 
@@ -216,7 +216,7 @@ return (
             <div style={{display: 'flex', marginTop: '5px'}}>
                 <RoomIcon style={{color: "#407C86"}}/>
                 <Typography style={{color: "#407C86"}}>
-                    {item.address}
+                    {item?.address}
                 </Typography>
             </div>
 
@@ -254,7 +254,7 @@ export const getStaticProps = async ({ params }) => {
   
     const paths = items.map((item) => ({
       params: {
-        slug: item.slug.current,
+        slug: item?.slug.current,
       },
     }));
   
