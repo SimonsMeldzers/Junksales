@@ -25,13 +25,12 @@ a {
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  padding-bottom: 20px;
 }
 .container{
   align-self: center;
   min-width: 78%;
-  height: 100vh;
-  margin-bottom: 50px;
+  
 }
 .navbar{
   display: flex;
