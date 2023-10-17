@@ -31,6 +31,7 @@ a {
   align-self: center;
   min-width: 78%;
   height: 100vh;
+  margin-bottom: 50px;
 }
 .navbar{
   display: flex;
@@ -263,6 +264,6 @@ a {
   }
   .s-img-container{
     width: 100% !important;
-
+    height: 90vh !important;
   }
 }
